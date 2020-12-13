@@ -1,0 +1,24 @@
+h1 {
+  font-size: 2rem;
+}
+
+p {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.quiz-btn {
+  background-color:#550055;
+  color: white;
+}
+
+.quiz-btn:hover {
+  background-color: purple;
+  color: white;
+}
+
+#init-enter {
+  font-size: 1.1rem;
+  width: 5rem;
+  height: 2.1rem;
+}
