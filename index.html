@@ -8,10 +8,114 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
+    <header class="container">
+      <div class="row">
+        <div class="col-2">
+          View High Scores
+        </div>
+        <div class="col-8"></div>
+        <div class="col-2">
+          Time: 60
+        </div>
+      </div>
+      <hr/>
+    </header>
     <main class="container">
+      <!-- Introduction -->
       <section>
         <h1 class="text-center">Coding Quiz Challenge</h1>
+        <div class="row justify-content-center">
+          <div class="col-md-8 text-center">
+            <p>Welcome to the Javascript coding quiz! You will be presented with a series of multiple-choice questions on Javascript fundamentals. You will start with 60 seconds on the clock. Every wrong answer will subtract 10 seconds. You will be scored based on the amount of time left on the clock at the end. Good luck!</p>   
+            <button class="btn btn-primary">Start Quiz</button>
+          </div>
+        </div>
       </section>
+
+      <!-- Question -->
+      <section>
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <h4 class="text-center">Example question with lots of text and lots of text and lots of text and lots of text and lots of text</h4>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col text-center">
+            <button class="btn btn-primary">Answer 1</button>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col text-center">
+            <button class="btn btn-primary">Answer 2</button>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col text-center">
+            <button class="btn btn-primary">Answer 3</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-center">
+            <button class="btn btn-primary">Answer 4</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quiz Complete -->
+      <section>
+        <h1 class="text-center">Quiz Complete!</h1>
+        <div class="row justify-content-center">
+          <div class="col-md-8 text-center">
+            <p>Your final score was <span>0</span></p>
+            <p>Enter your initials for the score board:</p>  
+            <input placeholder="Initials"></input>
+            <button class="btn btn-primary">Submit Score</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- High Scores -->
+      <section>
+        <h1 class="text-center">High Scores</h1>
+        <div class="row justify-content-center">
+          <div class="col-6 text-center">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Initials</th>
+                  <th>Score</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>TEST</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td>TEST</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td>TEST</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td>TEST</td>
+                  <td>0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-6 text-center">
+            <button class="btn btn-primary mb-1">Return</button>
+            <button class="btn btn-primary mb-1">Clear Scores</button>
+          </div>        
+        </div>
+      </section>
+
+
     </main>
     <script src="assets/js/script.js"></script>
   </body>
