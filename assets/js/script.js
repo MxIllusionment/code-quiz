@@ -30,3 +30,15 @@ var questionList = [
     correctAnswer: 3
   },
 ];
+
+/* Updates the question and answer text to the specified question index */
+function updateQuestion(qIdx) {
+  var questionText = document.getElementById("question-text");
+
+  questionText.textContent = questionList[qIdx].question;
+  
+  for(var i = 0; i < 4; i++) {
+    var answerText = document.getElementById("answer-btn-" + (i+1));
+    answerText.textContent = questionList[qIdx].answers[i];
+  }
+}
