@@ -42,3 +42,21 @@ function updateQuestion(qIdx) {
     answerText.textContent = questionList[qIdx].answers[i];
   }
 }
+
+/* Removes a component by ID by setting its display to 'none' */
+function hideID(id) {
+  var element = document.getElementById(id);
+
+  element.setAttribute("style", "display:none");
+}
+
+/* Removes a component by ID by setting its display to 'none' */
+function showID(id) {
+  var element = document.getElementById(id);
+
+  element.setAttribute("style", "");
+}
+
+hideID("question-page");
+hideID("complete-page");
+hideID("high-score-page");
