@@ -75,7 +75,7 @@ function hideID(id) {
   element.style.display = "none";
 }
 
-/* Removes a component by ID by setting its display to 'none' */
+/* Removes a component by ID by setting its display to empty string */
 function showID(id) {
   var element = document.getElementById(id);
 
@@ -90,10 +90,6 @@ function updateTimer(adjust) {
   if (currentTime === 0) {
     finishQuiz();
   }
-}
-
-function countdown() {
-  updateTimer(-1);
 }
 
 /* Set initial state */
@@ -127,12 +123,14 @@ startBtn.addEventListener("click", function() {
   /* Start timer countdown */
   currentTime = 60;
   timeCounter.textContent = currentTime;
-  timerInterval = setInterval(countdown, 1000);
+  timerInterval = setInterval(function() {
+    updateTimer(-1);
+  }, 1000);
 });
 
 /* Add listener to question answer buttons */
 answerBtnDiv.addEventListener("click", function(event) {
-    if(event.target.matches("button")) {
+  if(event.target.matches("button")) {
     /* Check if answer is correct */
     if (event.target.id === "answer-btn-" + questionList[currentQuestion].correctAnswer ) {
       resultText.textContent = "Correct!";
