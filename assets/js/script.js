@@ -113,11 +113,13 @@ function updateTimer() {
 }
 
 /* Set initial state */
-hideID("question-page");
-hideID("result-block");
-hideID("complete-page");
-hideID("high-score-page");
-timerDiv.setAttribute("style", "visibility:hidden");
+function initializePage() {
+  hideID("question-page");
+  hideID("result-block");
+  hideID("complete-page");
+  hideID("high-score-page");
+  timerDiv.setAttribute("style", "visibility:hidden");
+}
 
 /* Add listener to start quiz when Start button is clicked */
 startBtn.addEventListener("click", function() {
@@ -148,3 +150,5 @@ for (var i = 0; i < 4; i++) {
   var button = document.getElementById("answer-btn-" + (i + 1));
   button.addEventListener("click", answerQuestion);
 }
+
+initializePage();
