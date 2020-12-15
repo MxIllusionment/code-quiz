@@ -85,7 +85,7 @@ function finishQuiz() {
   var scoreDisplay = document.getElementById("final-score");
   clearInterval(timerInterval);
   hideID("question-page");
-  timerDiv.setAttribute("style", "visibility:hidden");
+  timerDiv.style.visibility = "hidden";
   scoreDisplay.textContent = currentTime;
   showID("complete-page");
 }
@@ -94,14 +94,15 @@ function finishQuiz() {
 function hideID(id) {
   var element = document.getElementById(id);
 
-  element.setAttribute("style", "display:none");
+
+  element.style.display = "none";
 }
 
 /* Removes a component by ID by setting its display to 'none' */
 function showID(id) {
   var element = document.getElementById(id);
 
-  element.setAttribute("style", "");
+  element.style.display = "";
 }
 
 /* Timer countdown */
@@ -121,16 +122,16 @@ function initializePage() {
   hideID("result-block");
   hideID("complete-page");
   hideID("high-score-page");
-  timerDiv.setAttribute("style", "visibility:hidden");
+  timerDiv.style.visibility = "hidden";
 }
 
 /* Add listener to start quiz when Start button is clicked */
 startBtn.addEventListener("click", function() {
   /* Hide 'View High Scores' */
-  viewScoresDiv.setAttribute("style", "visibility: hidden");
+  viewScoresDiv.style.visibility = "hidden";
 
   /* Show Timer */
-  timerDiv.setAttribute("style", "visibility: visible");
+  timerDiv.style.visibility = "visible";
 
   /* Hide start page */
   hideID("start-page");
