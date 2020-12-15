@@ -123,6 +123,7 @@ function initializePage() {
   hideID("result-block");
   hideID("complete-page");
   hideID("high-score-page");
+  viewScoresDiv.style.visibility = "visible";
   timerDiv.style.visibility = "hidden";
 }
 
