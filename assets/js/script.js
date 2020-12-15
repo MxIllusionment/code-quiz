@@ -34,9 +34,12 @@ var questionList = [
 var viewScoresDiv = document.getElementById("view-high-scores");
 var resultDiv = document.getElementById("result-block");
 var timerDiv = document.getElementById("timer-div");
+var timeCounter = document.getElementById("timer");
 var startBtn = document.getElementById("start-btn");
 
 var currentQuestion;
+var currentTime;
+var timerInterval;
 
 /* Updates the question and answer text to the specified question index */
 function updateQuestion(qIdx) {
@@ -66,6 +69,17 @@ function showID(id) {
   element.setAttribute("style", "");
 }
 
+/* Timer countdown */
+function updateTimer() {
+  if (currentTime > 0) {
+    currentTime--;  
+    timeCounter.textContent = currentTime;
+  }
+  if (currentTime === 0) {
+    clearInterval(timerInterval);
+  }
+}
+
 /* Set initial state */
 hideID("question-page");
 hideID("result-block");
@@ -89,4 +103,9 @@ startBtn.addEventListener("click", function() {
 
   /* Show question page */
   showID("question-page");
+
+  /* Start timer countdown */
+  currentTime = 60;
+  timeCounter.textContent = currentTime;
+  timerInterval = setInterval(updateTimer, 1000);
 });
