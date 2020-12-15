@@ -62,9 +62,7 @@ function answerQuestion(event) {
   if (event.target.id === "answer-btn-" + questionList[currentQuestion].correctAnswer ) {
     resultText.textContent = "Correct!";
   } else {
-    currentTime -= 10;
-    currentTime = currentTime < 0 ? 0 : currentTime;
-    timeCounter.textContent = currentTime;
+    updateTimer(-10);
     resultText.textContent = "Wrong!";
   }
   showID("result-block");
@@ -84,6 +82,7 @@ function answerQuestion(event) {
 function finishQuiz() {
   var scoreDisplay = document.getElementById("final-score");
   clearInterval(timerInterval);
+
   hideID("question-page");
   timerDiv.style.visibility = "hidden";
   scoreDisplay.textContent = currentTime;
@@ -93,7 +92,6 @@ function finishQuiz() {
 /* Removes a component by ID by setting its display to 'none' */
 function hideID(id) {
   var element = document.getElementById(id);
-
 
   element.style.display = "none";
 }
@@ -105,15 +103,18 @@ function showID(id) {
   element.style.display = "";
 }
 
-/* Timer countdown */
-function updateTimer() {
-  if (currentTime > 0) {
-    currentTime--;  
-    timeCounter.textContent = currentTime;
-  } 
-  if (currentTime <= 0) {
+/* Update timer and finishes quiz if timer is expired */
+function updateTimer(adjust) {
+  currentTime = currentTime + adjust > 0 ? currentTime + adjust : 0;
+  timeCounter.textContent = currentTime;
+
+  if (currentTime === 0) {
     finishQuiz();
   }
+}
+
+function countdown() {
+  updateTimer(-1);
 }
 
 /* Set initial state */
@@ -146,7 +147,7 @@ startBtn.addEventListener("click", function() {
   /* Start timer countdown */
   currentTime = 60;
   timeCounter.textContent = currentTime;
-  timerInterval = setInterval(updateTimer, 1000);
+  timerInterval = setInterval(countdown, 1000);
 });
 
 /* Add listener to question answer buttons */
