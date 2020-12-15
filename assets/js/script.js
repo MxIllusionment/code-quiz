@@ -69,6 +69,9 @@ function answerQuestion(event) {
   }
   showID("result-block");
 
+  /* Remove focus from button */
+  event.target.blur();
+
   currentQuestion++;
   if(currentQuestion < questionList.length) {
     updateQuestion(currentQuestion);
