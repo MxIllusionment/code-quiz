@@ -33,6 +33,7 @@ var questionList = [
 
 var viewScoresDiv = document.getElementById("view-high-scores");
 var resultDiv = document.getElementById("result-block");
+var resultText = document.getElementById("result-text");
 var timerDiv = document.getElementById("timer-div");
 var timeCounter = document.getElementById("timer");
 var startBtn = document.getElementById("start-btn");
@@ -45,14 +46,45 @@ var timerInterval;
 function updateQuestion(qIdx) {
   var questionText = document.getElementById("question-text");
 
-  currentQuestion = qIdx;
-
-  questionText.textContent = questionList[qIdx].question;
-  
-  for(var i = 0; i < 4; i++) {
-    var answerText = document.getElementById("answer-btn-" + (i+1));
-    answerText.textContent = questionList[qIdx].answers[i];
+  if (qIdx < questionList.length) {
+    questionText.textContent = questionList[qIdx].question;
+    
+    for(var i = 0; i < 4; i++) {
+      var answerText = document.getElementById("answer-btn-" + (i+1));
+      answerText.textContent = questionList[qIdx].answers[i];
+    }
   }
+}
+
+/* Responds to a question answer by updating score, result text, and moving to next question */
+function answerQuestion(event) {
+  /* Check if answer is correct */
+  if (event.target.id === "answer-btn-" + questionList[currentQuestion].correctAnswer ) {
+    resultText.textContent = "Correct!";
+  } else {
+    currentTime -= 10;
+    currentTime = currentTime < 0 ? 0 : currentTime;
+    timeCounter.textContent = currentTime;
+    resultText.textContent = "Wrong!";
+  }
+  showID("result-block");
+
+  currentQuestion++;
+  if(currentQuestion < questionList.length) {
+    updateQuestion(currentQuestion);
+  } else {
+    finishQuiz();
+  }
+}
+
+/* Finishes the quiz by moving to the final score screen */
+function finishQuiz() {
+  var scoreDisplay = document.getElementById("final-score");
+  clearInterval(timerInterval);
+  hideID("question-page");
+  hideID("header");
+  scoreDisplay.textContent = currentTime;
+  showID("complete-page");
 }
 
 /* Removes a component by ID by setting its display to 'none' */
@@ -74,9 +106,9 @@ function updateTimer() {
   if (currentTime > 0) {
     currentTime--;  
     timeCounter.textContent = currentTime;
-  }
-  if (currentTime === 0) {
-    clearInterval(timerInterval);
+  } 
+  if (currentTime <= 0) {
+    finishQuiz();
   }
 }
 
@@ -99,6 +131,7 @@ startBtn.addEventListener("click", function() {
   hideID("start-page");
 
   /* Load first question */
+  currentQuestion = 0;
   updateQuestion(0);
 
   /* Show question page */
@@ -109,3 +142,9 @@ startBtn.addEventListener("click", function() {
   timeCounter.textContent = currentTime;
   timerInterval = setInterval(updateTimer, 1000);
 });
+
+/* Add listener to question answer buttons */
+for (var i = 0; i < 4; i++) {
+  var button = document.getElementById("answer-btn-" + (i + 1));
+  button.addEventListener("click", answerQuestion);
+}
