@@ -82,7 +82,7 @@ function finishQuiz() {
   var scoreDisplay = document.getElementById("final-score");
   clearInterval(timerInterval);
   hideID("question-page");
-  hideID("header");
+  timerDiv.setAttribute("style", "visibility:hidden");
   scoreDisplay.textContent = currentTime;
   showID("complete-page");
 }
