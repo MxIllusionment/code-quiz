@@ -37,6 +37,7 @@ var resultText = document.getElementById("result-text");
 var timerDiv = document.getElementById("timer-div");
 var timeCounter = document.getElementById("timer");
 var startBtn = document.getElementById("start-btn");
+var answerBtnDiv = document.getElementById("answer-btns");
 
 var currentQuestion;
 var currentTime;
@@ -53,28 +54,6 @@ function updateQuestion(qIdx) {
       var answerText = document.getElementById("answer-btn-" + (i+1));
       answerText.textContent = questionList[qIdx].answers[i];
     }
-  }
-}
-
-/* Responds to a question answer by updating score, result text, and moving to next question */
-function answerQuestion(event) {
-  /* Check if answer is correct */
-  if (event.target.id === "answer-btn-" + questionList[currentQuestion].correctAnswer ) {
-    resultText.textContent = "Correct!";
-  } else {
-    updateTimer(-10);
-    resultText.textContent = "Wrong!";
-  }
-  showID("result-block");
-
-  /* Remove focus from button */
-  event.target.blur();
-
-  currentQuestion++;
-  if(currentQuestion < questionList.length) {
-    updateQuestion(currentQuestion);
-  } else {
-    finishQuiz();
   }
 }
 
@@ -152,9 +131,28 @@ startBtn.addEventListener("click", function() {
 });
 
 /* Add listener to question answer buttons */
-for (var i = 0; i < 4; i++) {
-  var button = document.getElementById("answer-btn-" + (i + 1));
-  button.addEventListener("click", answerQuestion);
-}
+answerBtnDiv.addEventListener("click", function(event) {
+    if(event.target.matches("button")) {
+    /* Check if answer is correct */
+    if (event.target.id === "answer-btn-" + questionList[currentQuestion].correctAnswer ) {
+      resultText.textContent = "Correct!";
+    } else {
+      updateTimer(-10);
+      resultText.textContent = "Wrong!";
+    }
+    showID("result-block");
+
+    /* Remove focus from button */
+    event.target.blur();
+
+    /* Moves to next question or finishes quiz on last question */
+    currentQuestion++;
+    if(currentQuestion < questionList.length) {
+      updateQuestion(currentQuestion);
+    } else {
+      finishQuiz();
+    }
+  }
+});
 
 initializePage();
