@@ -94,6 +94,7 @@ function updateTimer(adjust) {
 
 /* Set initial state */
 function initializePage() {
+  showID("start-page");
   hideID("question-page");
   hideID("result-block");
   hideID("complete-page");
