@@ -29,6 +29,16 @@ var questionList = [
     answers: ["x = y", "x == y", "x === y", "x != y"],
     correctAnswer: 3
   },
+  {
+    question: "Which of these keywords is used to create a loop with an initialization, a condition, and an iterator?",
+    answers: ["while", "do", "for", "loop"],
+    correctAnswer: 3
+  },
+  {
+    question: "What logical operator is used when you want to check if one statment OR another is true?",
+    answers: ["||", "&&", "!!", "OR"],
+    correctAnswer: 1
+  }
 ];
 
 var viewScoresDiv = document.getElementById("view-high-scores");
