@@ -68,7 +68,7 @@ function updateQuestion(qIdx) {
     
     for(var i = 0; i < 4; i++) {
       var answerText = document.getElementById("answer-btn-" + (i+1));
-      answerText.textContent = questionList[qIdx].answers[i];
+      answerText.textContent = (i+1) + ". " + questionList[qIdx].answers[i];
     }
   }
 }
