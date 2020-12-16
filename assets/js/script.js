@@ -70,6 +70,7 @@ function finishQuiz() {
   hideID("question-page");
   timerDiv.style.visibility = "hidden";
   scoreDisplay.textContent = currentTime;
+  initialInput.value = "";
   showID("complete-page");
 }
 
