@@ -57,6 +57,7 @@ var initialInput = document.getElementById("init-enter");
 var currentQuestion;
 var currentTime;
 var timerInterval;
+var resultTimeout;
 
 /* Updates the question and answer text to the specified question index */
 function updateQuestion(qIdx) {
@@ -162,6 +163,12 @@ answerBtnDiv.addEventListener("click", function(event) {
       resultText.textContent = "Wrong!";
     }
     showID("result-block");
+
+    /* Hide result of previous question after 2 seconds */
+    clearTimeout(resultTimeout);
+    resultTimeout = setTimeout(function () {
+                                hideID("result-block");
+                              }, 2000);
 
     /* Remove focus from button */
     event.target.blur();
