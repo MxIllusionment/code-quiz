@@ -13,7 +13,6 @@ p {
 }
 
 .quiz-btn:hover {
-  background-color: purple;
   color: white;
 }
 
@@ -30,4 +29,11 @@ p {
   font-weight: bold;
   color:#550055;
   cursor:pointer;
+}
+
+/* Only change background color on hover if hover is enabled (i.e. not mobile) */
+@media (hover: hover) {
+  .quiz-btn:hover {
+    background-color: purple;
+  }
 }
