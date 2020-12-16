@@ -194,5 +194,3 @@ submitScoreBtn.addEventListener("click", function() {
     showScores();
   }
 })
-
-initializePage();
