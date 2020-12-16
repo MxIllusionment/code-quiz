@@ -7,6 +7,7 @@ This is an exercise in assigning event functions and manipulating the page throu
 
 ## Screenshots
 ![Start page screenshot](assets/images/start-page.png)  
+
 ![Question page screenshot](assets/images/question-page.png)
 
 ## Deployment
