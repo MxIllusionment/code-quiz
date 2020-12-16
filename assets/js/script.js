@@ -68,6 +68,12 @@ function finishQuiz() {
   showID("complete-page");
 }
 
+/* Shows high score page */
+function showScores() {
+  /* TODO: load high scores from storage */
+  showID("high-score-page");
+}
+
 /* Removes a component by ID by setting its display to 'none' */
 function hideID(id) {
   var element = document.getElementById(id);
@@ -153,5 +159,12 @@ answerBtnDiv.addEventListener("click", function(event) {
     }
   }
 });
+
+/* Add listener to View High Scores div to move directly to high score page */
+viewScoresDiv.addEventListener("click", function() {
+  hideID("start-page");
+  viewScoresDiv.style.visibility = "hidden";
+  showScores();
+})
 
 initializePage();

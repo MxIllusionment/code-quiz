@@ -25,3 +25,9 @@ p {
 #result-text {
   font-style: italic;
 }
+
+#view-high-scores {
+  font-weight: bold;
+  color:#550055;
+  cursor:pointer;
+}
