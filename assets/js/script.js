@@ -36,8 +36,13 @@ var resultDiv = document.getElementById("result-block");
 var resultText = document.getElementById("result-text");
 var timerDiv = document.getElementById("timer-div");
 var timeCounter = document.getElementById("timer");
+
 var startBtn = document.getElementById("start-btn");
 var answerBtnDiv = document.getElementById("answer-btns");
+var returnBtn = document.getElementById("return-btn");
+var submitScoreBtn = document.getElementById("submit-score-btn");
+
+var initialInput = document.getElementById("init-enter");
 
 var currentQuestion;
 var currentTime;
@@ -165,6 +170,18 @@ viewScoresDiv.addEventListener("click", function() {
   hideID("start-page");
   viewScoresDiv.style.visibility = "hidden";
   showScores();
+})
+
+/* Add listener to 'Return' button to reinitialize to start condition */
+returnBtn.addEventListener("click", initializePage);
+
+/* Add listener to 'Submit Score' button to add score to storage and open score page */
+submitScoreBtn.addEventListener("click", function() {
+  if (initialInput.value != "") {
+    /* TODO: add initials & score to storage */
+    hideID("complete-page");
+    showScores();
+  }
 })
 
 initializePage();
