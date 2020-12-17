@@ -35,7 +35,7 @@ var questionList = [
     correctAnswer: 3
   },
   {
-    question: "What logical operator is used when you want to check if one statment OR another is true?",
+    question: "What logical operator is used when you want to check if one statement OR another is true?",
     answers: ["||", "&&", "!!", "OR"],
     correctAnswer: 1
   }
