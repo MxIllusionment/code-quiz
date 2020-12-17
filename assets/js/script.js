@@ -46,11 +46,13 @@ var resultDiv = document.getElementById("result-block");
 var resultText = document.getElementById("result-text");
 var timerDiv = document.getElementById("timer-div");
 var timeCounter = document.getElementById("timer");
+var scoreTableBody = document.getElementById("score-table-body");
 
 var startBtn = document.getElementById("start-btn");
 var answerBtnDiv = document.getElementById("answer-btns");
 var returnBtn = document.getElementById("return-btn");
 var submitScoreBtn = document.getElementById("submit-score-btn");
+var clearScoresBtn = document.getElementById("clear-score-btn");
 
 var initialInput = document.getElementById("init-enter");
 
@@ -58,6 +60,7 @@ var currentQuestion;
 var currentTime;
 var timerInterval;
 var resultTimeout;
+var scoreList;
 
 /* Updates the question and answer text to the specified question index */
 function updateQuestion(qIdx) {
@@ -85,9 +88,30 @@ function finishQuiz() {
   showID("complete-page");
 }
 
+/* Loads high score from local storage */
+function loadScores() {
+  scoreList = JSON.parse(localStorage.getItem("highScores")) || [];
+}
+
 /* Shows high score page */
 function showScores() {
-  /* TODO: load high scores from storage */
+  loadScores();
+  
+  /* Update score table with new data */
+  scoreTableBody.innerHTML = "";
+  for(var i = 0; i < scoreList.length; i++) {
+    var tableRow = document.createElement("tr");
+    var initialsData = document.createElement("td");
+    var scoreData = document.createElement("td");
+
+    initialsData.textContent = scoreList[i].initials;
+    scoreData.textContent = scoreList[i].score;
+
+    tableRow.append(initialsData);
+    tableRow.append(scoreData);
+
+    scoreTableBody.append(tableRow);
+  }
   showID("high-score-page");
 }
 
@@ -196,8 +220,34 @@ returnBtn.addEventListener("click", initializePage);
 /* Add listener to 'Submit Score' button to add score to storage and open score page */
 submitScoreBtn.addEventListener("click", function() {
   if (initialInput.value != "") {
-    /* TODO: add initials & score to storage */
+    /* add initials & score to score array */
+    var newScore = {
+      initials: initialInput.value,
+      score: currentTime
+    }
+    scoreList.push(newScore);
+
+    /* Sort new array to keep scores in order */
+    scoreList.sort(function(a, b) {
+      if (a.score < b.score) {
+        return 1
+      } else if (a.score > b.score) {
+        return -1;
+      } else {
+        return 0;
+      }
+    })
+    /* Store new scores list in local storage */
+    localStorage.setItem("highScores", JSON.stringify(scoreList));
     hideID("complete-page");
     showScores();
   }
 })
+
+clearScoresBtn.addEventListener("click", function() {
+  localStorage.removeItem("highScores");
+  showScores();
+})
+
+/* Initialization */
+loadScores();
