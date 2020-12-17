@@ -96,7 +96,7 @@ function loadScores() {
 /* Shows high score page */
 function showScores() {
   loadScores();
-  
+
   /* Update score table with new data */
   scoreTableBody.innerHTML = "";
   for(var i = 0; i < scoreList.length; i++) {
@@ -244,7 +244,8 @@ submitScoreBtn.addEventListener("click", function() {
   }
 })
 
-clearScoresBtn.addEventListener("click", function() {
+clearScoresBtn.addEventListener("click", function(event) {
+  event.target.blur();
   localStorage.removeItem("highScores");
   showScores();
 })
