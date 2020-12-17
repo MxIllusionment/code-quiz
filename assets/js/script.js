@@ -54,6 +54,7 @@ var returnBtn = document.getElementById("return-btn");
 var submitScoreBtn = document.getElementById("submit-score-btn");
 var clearScoresBtn = document.getElementById("clear-score-btn");
 
+var submitScoreForm = document.getElementById("submit-score-form");
 var initialInput = document.getElementById("init-enter");
 
 var currentQuestion;
@@ -217,8 +218,9 @@ viewScoresDiv.addEventListener("click", function() {
 /* Add listener to 'Return' button to reinitialize to start condition */
 returnBtn.addEventListener("click", initializePage);
 
-/* Add listener to 'Submit Score' button to add score to storage and open score page */
-submitScoreBtn.addEventListener("click", function() {
+/* Add listener to 'Submit Score' form to add score to storage and open score page */
+submitScoreForm.addEventListener("submit", function(event) {
+  event.preventDefault();
   if (initialInput.value != "") {
     /* add initials & score to score array */
     var newScore = {
@@ -237,6 +239,7 @@ submitScoreBtn.addEventListener("click", function() {
         return 0;
       }
     })
+    
     /* Store new scores list in local storage */
     localStorage.setItem("highScores", JSON.stringify(scoreList));
     hideID("complete-page");
