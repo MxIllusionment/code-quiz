@@ -63,6 +63,31 @@ var timerInterval;
 var resultTimeout;
 var scoreList;
 
+/* Removes a component by ID by setting its display to 'none' */
+function hideID(id) {
+  var element = document.getElementById(id);
+
+  element.style.display = "none";
+}
+
+/* Removes a component by ID by setting its display to empty string */
+function showID(id) {
+  var element = document.getElementById(id);
+
+  element.style.display = "";
+}
+
+/* Set initial state */
+function initializePage() {
+  showID("start-page");
+  hideID("question-page");
+  hideID("result-block");
+  hideID("complete-page");
+  hideID("high-score-page");
+  viewScoresDiv.style.visibility = "visible";
+  timerDiv.style.visibility = "hidden";
+}
+
 /* Updates the question and answer text to the specified question index */
 function updateQuestion(qIdx) {
   var questionText = document.getElementById("question-text");
@@ -87,6 +112,16 @@ function finishQuiz() {
   scoreDisplay.textContent = currentTime;
   initialInput.value = "";
   showID("complete-page");
+}
+
+/* Update timer and finishes quiz if timer is expired */
+function updateTimer(adjust) {
+  currentTime = currentTime + adjust > 0 ? currentTime + adjust : 0;
+  timeCounter.textContent = currentTime;
+
+  if (currentTime === 0) {
+    finishQuiz();
+  }
 }
 
 /* Loads high score from local storage */
@@ -114,41 +149,6 @@ function showScores() {
     scoreTableBody.append(tableRow);
   }
   showID("high-score-page");
-}
-
-/* Removes a component by ID by setting its display to 'none' */
-function hideID(id) {
-  var element = document.getElementById(id);
-
-  element.style.display = "none";
-}
-
-/* Removes a component by ID by setting its display to empty string */
-function showID(id) {
-  var element = document.getElementById(id);
-
-  element.style.display = "";
-}
-
-/* Update timer and finishes quiz if timer is expired */
-function updateTimer(adjust) {
-  currentTime = currentTime + adjust > 0 ? currentTime + adjust : 0;
-  timeCounter.textContent = currentTime;
-
-  if (currentTime === 0) {
-    finishQuiz();
-  }
-}
-
-/* Set initial state */
-function initializePage() {
-  showID("start-page");
-  hideID("question-page");
-  hideID("result-block");
-  hideID("complete-page");
-  hideID("high-score-page");
-  viewScoresDiv.style.visibility = "visible";
-  timerDiv.style.visibility = "hidden";
 }
 
 /* Add listener to start quiz when Start button is clicked */
@@ -239,7 +239,7 @@ submitScoreForm.addEventListener("submit", function(event) {
         return 0;
       }
     })
-    
+
     /* Store new scores list in local storage */
     localStorage.setItem("highScores", JSON.stringify(scoreList));
     hideID("complete-page");
@@ -247,6 +247,7 @@ submitScoreForm.addEventListener("submit", function(event) {
   }
 })
 
+/* Add listener to 'Clear Scores" button to delete score storage and reload score page */
 clearScoresBtn.addEventListener("click", function(event) {
   event.target.blur();
   localStorage.removeItem("highScores");
