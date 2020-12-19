@@ -7,6 +7,7 @@ p {
   font-weight: 600;
 }
 
+/* Modified styling for all buttons */
 .quiz-btn {
   background-color:#550055;
   color: white;
@@ -16,22 +17,25 @@ p {
   color: white;
 }
 
+/* Initials entry box */
 #init-enter {
   font-size: 1.1rem;
   height: 2.1rem;
 }
 
+/* Text showing "correct" or "wrong" */
 #result-text {
   font-style: italic;
 }
 
+/* View High Scores div, acting as psuedo-link */
 #view-high-scores {
   font-weight: bold;
   color:#550055;
   cursor:pointer;
 }
 
-/* Only change background color on hover if hover is enabled (i.e. not mobile) */
+/* Only change button background color on hover if hover is enabled (i.e. not mobile) */
 @media (hover: hover) {
   .quiz-btn:hover {
     background-color: purple;
