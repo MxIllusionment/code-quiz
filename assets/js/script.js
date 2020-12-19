@@ -170,7 +170,7 @@ startBtn.addEventListener("click", function() {
   showID("question-page");
 
   /* Start timer countdown */
-  currentTime = 60;
+  currentTime = 75;
   timeCounter.textContent = currentTime;
   timerInterval = setInterval(function() {
     updateTimer(-1);
