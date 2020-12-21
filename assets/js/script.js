@@ -38,6 +38,16 @@ var questionList = [
     question: "What logical operator is used when you want to check if one statement OR another is true?",
     answers: ["||", "&&", "!!", "OR"],
     correctAnswer: 1
+  },
+  {
+    question: "Which HTML element is used for including Javascript in a page?",
+    answers: ["<java>", "<javascript>", "<script>", "<code>"],
+    correctAnswer: 3
+  },
+  {
+    question: "What statement is used to terminate a loop early?",
+    answers: ["continue", "break", "stop", "terminate"],
+    correctAnswer: 2
   }
 ];
 
