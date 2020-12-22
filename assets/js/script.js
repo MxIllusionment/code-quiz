@@ -1,6 +1,6 @@
 var questionList = [
   {
-    question: "All lines should be terminated with a ________",
+    question: "All statements should be terminated with a ________",
     answers: ["semicolon", "period", "ampersand", "backslash"],
     correctAnswer: 1
   },
@@ -98,16 +98,31 @@ function initializePage() {
   timerDiv.style.visibility = "hidden";
 }
 
-/* Updates the question and answer text to the specified question index */
+/* Updates the question and answers to the specified question index */
 function updateQuestion(qIdx) {
   var questionText = document.getElementById("question-text");
 
   if (qIdx < questionList.length) {
     questionText.textContent = questionList[qIdx].question;
-    
-    for(var i = 0; i < 4; i++) {
-      var answerText = document.getElementById("answer-btn-" + (i+1));
-      answerText.textContent = (i+1) + ". " + questionList[qIdx].answers[i];
+
+    /* Clear answer buttons */
+    answerBtnDiv.innerHTML = "";
+
+    /* Add a new button for each answer in the answer list */
+    for (var i = 0; i < questionList[qIdx].answers.length; i++) {
+      var newBtnRow = document.createElement("div");
+      var newBtnCol = document.createElement("div");
+      var newBtn = document.createElement("button");
+
+      newBtnRow.classList.add("row", "mb-1", "justify-content-center");
+      newBtnCol.classList.add("col-xs-8", "col-sm-6", "col-lg-4");
+      newBtn.classList.add("btn", "quiz-btn");
+      newBtn.textContent = (i + 1) + ". " + questionList[qIdx].answers[i];
+      newBtn.setAttribute("data-value", i + 1);
+
+      newBtnCol.appendChild(newBtn);
+      newBtnRow.appendChild(newBtnCol);
+      answerBtnDiv.appendChild(newBtnRow);
     }
   }
 }
@@ -145,7 +160,7 @@ function showScores() {
 
   /* Update score table with new data */
   scoreTableBody.innerHTML = "";
-  for(var i = 0; i < scoreList.length; i++) {
+  for (var i = 0; i < scoreList.length; i++) {
     var tableRow = document.createElement("tr");
     var initialsData = document.createElement("td");
     var scoreData = document.createElement("td");
@@ -162,7 +177,7 @@ function showScores() {
 }
 
 /* Add listener to start quiz when Start button is clicked */
-startBtn.addEventListener("click", function() {
+startBtn.addEventListener("click", function () {
   /* Hide 'View High Scores' */
   viewScoresDiv.style.visibility = "hidden";
 
@@ -182,16 +197,16 @@ startBtn.addEventListener("click", function() {
   /* Start timer countdown */
   currentTime = 75;
   timeCounter.textContent = currentTime;
-  timerInterval = setInterval(function() {
+  timerInterval = setInterval(function () {
     updateTimer(-1);
   }, 1000);
 });
 
 /* Add listener to question answer buttons */
-answerBtnDiv.addEventListener("click", function(event) {
-  if(event.target.matches("button")) {
+answerBtnDiv.addEventListener("click", function (event) {
+  if (event.target.matches("button")) {
     /* Check if answer is correct */
-    if (event.target.id === "answer-btn-" + questionList[currentQuestion].correctAnswer ) {
+    if (parseInt(event.target.getAttribute("data-value")) === questionList[currentQuestion].correctAnswer) {
       resultText.textContent = "Correct!";
     } else {
       updateTimer(-10);
@@ -202,15 +217,15 @@ answerBtnDiv.addEventListener("click", function(event) {
     /* Hide result of previous question after 2 seconds */
     clearTimeout(resultTimeout);
     resultTimeout = setTimeout(function () {
-                                hideID("result-block");
-                              }, 2000);
+      hideID("result-block");
+    }, 2000);
 
     /* Remove focus from button */
     event.target.blur();
 
     /* Moves to next question or finishes quiz on last question */
     currentQuestion++;
-    if(currentQuestion < questionList.length) {
+    if (currentQuestion < questionList.length) {
       updateQuestion(currentQuestion);
     } else {
       finishQuiz();
@@ -219,17 +234,17 @@ answerBtnDiv.addEventListener("click", function(event) {
 });
 
 /* Add listener to View High Scores div to move directly to high score page */
-viewScoresDiv.addEventListener("click", function() {
+viewScoresDiv.addEventListener("click", function () {
   hideID("start-page");
   viewScoresDiv.style.visibility = "hidden";
   showScores();
-})
+});
 
 /* Add listener to 'Return' button to reinitialize to start condition */
 returnBtn.addEventListener("click", initializePage);
 
 /* Add listener to 'Submit Score' form to add score to storage and open score page */
-submitScoreForm.addEventListener("submit", function(event) {
+submitScoreForm.addEventListener("submit", function (event) {
   event.preventDefault();
   if (initialInput.value != "") {
     /* add initials & score to score array */
@@ -240,7 +255,7 @@ submitScoreForm.addEventListener("submit", function(event) {
     scoreList.push(newScore);
 
     /* Sort new array to keep scores in order */
-    scoreList.sort(function(a, b) {
+    scoreList.sort(function (a, b) {
       if (a.score < b.score) {
         return 1
       } else if (a.score > b.score) {
@@ -248,21 +263,21 @@ submitScoreForm.addEventListener("submit", function(event) {
       } else {
         return 0;
       }
-    })
+    });
 
     /* Store new scores list in local storage */
     localStorage.setItem("highScores", JSON.stringify(scoreList));
     hideID("complete-page");
     showScores();
   }
-})
+});
 
 /* Add listener to 'Clear Scores" button to delete score storage and reload score page */
-clearScoresBtn.addEventListener("click", function(event) {
+clearScoresBtn.addEventListener("click", function (event) {
   event.target.blur();
   localStorage.removeItem("highScores");
   showScores();
-})
+});
 
 /* Initialization */
 loadScores();
