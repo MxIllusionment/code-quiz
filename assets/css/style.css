@@ -7,6 +7,15 @@ p {
   font-weight: 600;
 }
 
+/* Utility classes for modifying display of sections */
+.hide {
+  display: none;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
 /* Modified styling for all buttons */
 .quiz-btn {
   background-color:#550055;

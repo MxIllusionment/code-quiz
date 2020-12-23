@@ -73,18 +73,18 @@ var timerInterval;
 var resultTimeout;
 var scoreList;
 
-/* Removes a component by ID by setting its display to 'none' */
+/* Removes a component by ID by adding the hide class*/
 function hideID(id) {
   var element = document.getElementById(id);
 
-  element.style.display = "none";
+  element.classList.add("hide");
 }
 
-/* Removes a component by ID by setting its display to empty string */
+/* Removes a component by ID by removing the hide class */
 function showID(id) {
   var element = document.getElementById(id);
 
-  element.style.display = "";
+  element.classList.remove("hide");
 }
 
 /* Set initial state */
@@ -94,8 +94,8 @@ function initializePage() {
   hideID("result-block");
   hideID("complete-page");
   hideID("high-score-page");
-  viewScoresDiv.style.visibility = "visible";
-  timerDiv.style.visibility = "hidden";
+  viewScoresDiv.classList.remove("invisible");
+  timerDiv.classList.add("invisible");
 }
 
 /* Updates the question and answers to the specified question index */
@@ -133,7 +133,7 @@ function finishQuiz() {
   clearInterval(timerInterval);
 
   hideID("question-page");
-  timerDiv.style.visibility = "hidden";
+  timerDiv.classList.add("invisible");
   scoreDisplay.textContent = currentTime;
   initialInput.value = "";
   showID("complete-page");
@@ -179,10 +179,10 @@ function showScores() {
 /* Add listener to start quiz when Start button is clicked */
 startBtn.addEventListener("click", function () {
   /* Hide 'View High Scores' */
-  viewScoresDiv.style.visibility = "hidden";
+  viewScoresDiv.classList.add("invisible");
 
   /* Show Timer */
-  timerDiv.style.visibility = "visible";
+  timerDiv.classList.remove("invisible");
 
   /* Hide start page */
   hideID("start-page");
@@ -236,7 +236,7 @@ answerBtnDiv.addEventListener("click", function (event) {
 /* Add listener to View High Scores div to move directly to high score page */
 viewScoresDiv.addEventListener("click", function () {
   hideID("start-page");
-  viewScoresDiv.style.visibility = "hidden";
+  viewScoresDiv.classList.add("invisible");
   showScores();
 });
 

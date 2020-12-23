@@ -13,7 +13,7 @@
         <div id="view-high-scores" class="mt-2">
           View High Scores
         </div>
-        <div id="timer-div" class="mt-2" style="visibility: hidden;">
+        <div id="timer-div" class="mt-2 invisible">
           Time: <span id="timer"></span>
         </div>
       </div>
@@ -31,7 +31,7 @@
       </section>
 
       <!-- Question -->
-      <section id="question-page" style="display: none;">
+      <section id="question-page" class="hide">
         <div class="row justify-content-center">
           <div class="col-md-8">
             <p id="question-text" class="text-center"></p>
@@ -41,7 +41,7 @@
       </section>
 
       <!-- Quiz Complete -->
-      <section id="complete-page" style="display: none;">
+      <section id="complete-page" class="hide">
         <h1 class="text-center">Quiz Complete!</h1>
         <div class="row justify-content-center">
           <div class="col-md-8 text-center">
@@ -60,7 +60,7 @@
       </section>
 
       <!-- High Scores -->
-      <section id="high-score-page" style="display: none;">
+      <section id="high-score-page" class="hide">
         <h1 class="text-center">High Scores</h1>
         <div class="row justify-content-center">
           <div class="col-6 text-center">
@@ -79,7 +79,7 @@
       </section>
 
       <!-- Result of previous answer choice -->
-      <div id="result-block" class="row justify-content-center" style="display: none;">
+      <div id="result-block" class="row justify-content-center hide">
         <div class="col-xs-8 col-sm-6 col-lg-4">
           <hr/>
           <span id="result-text"></span>
